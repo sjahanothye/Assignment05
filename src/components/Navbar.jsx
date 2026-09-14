@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Logo from './Logo';
-import { Menu, X } from 'lucide-react';
+import { X } from 'lucide-react';
 
 export default function Navbar({ onOpenAuth }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function Navbar({ onOpenAuth }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* Mobile Left: Hamburger Icon */}
+          {/* ================= Mobile Left: Hamburger Icon ================= */}
           <div className="flex items-center lg:hidden">
             <button
               id="mobile-menu-toggle"
@@ -27,18 +27,34 @@ export default function Navbar({ onOpenAuth }) {
               className="p-2 -ml-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none transition-colors"
               aria-label="Toggle navigation"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5 text-slate-700" />
+              ) : (
+                /* Exact 3 horizontal lines matching Figma screenshot */
+                <svg
+                  width="20"
+                  height="16"
+                  viewBox="0 0 20 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="stroke-slate-700 hover:stroke-slate-900 transition-colors"
+                >
+                  <path d="M1.5 2H18.5" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M1.5 8H18.5" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M1.5 14H18.5" strokeWidth="2.2" strokeLinecap="round" />
+                </svg>
+              )}
             </button>
           </div>
 
-          {/* Brand Logo */}
+          {/* ================= Brand Logo (Centered on mobile, Left on desktop) ================= */}
           <div className="flex items-center">
             <a href="#" className="flex items-center">
               <Logo />
             </a>
           </div>
 
-          {/* Desktop Center: Nav Links */}
+          {/* ================= Desktop Center: Nav Links ================= */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => (
               <a
@@ -55,8 +71,8 @@ export default function Navbar({ onOpenAuth }) {
             ))}
           </nav>
 
-          {/* Right: Sign In & Sign Up buttons */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          {/* ================= Right: Sign In & Sign Up buttons ================= */}
+          <div className="flex items-center gap-2.5 sm:gap-4">
             <button
               type="button"
               onClick={() => onOpenAuth && onOpenAuth('signin')}
@@ -67,7 +83,7 @@ export default function Navbar({ onOpenAuth }) {
             <button
               type="button"
               onClick={() => onOpenAuth && onOpenAuth('signup')}
-              className="px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#E0287D] hover:bg-[#c91e6c] transition-all shadow-sm"
+              className="px-3.5 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold text-white bg-[#E0287D] hover:bg-[#c91e6c] transition-all shadow-sm"
             >
               Sign Up
             </button>
@@ -75,7 +91,7 @@ export default function Navbar({ onOpenAuth }) {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* ================= Mobile Expandable Menu ================= */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-5 space-y-1 shadow-lg animate-in fade-in duration-150">
           {navLinks.map((link) => (
