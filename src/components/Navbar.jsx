@@ -3,7 +3,7 @@ import Logo from './Logo';
 import { X } from 'lucide-react';
 
 export default function Navbar({ onOpenAuth }) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
     { name: 'Home', href: '#', active: true },
@@ -18,37 +18,37 @@ export default function Navbar({ onOpenAuth }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
           
-          {/* ================= Mobile Left: Hamburger Icon ================= */}
-          <div className="flex items-center lg:hidden">
+          {/* ================= Left: Hamburger Menu Icon & Brand Logo ================= */}
+          <div className="flex items-center gap-3">
+            {/* Hamburger Icon button in the corner */}
             <button
-              id="mobile-menu-toggle"
+              id="menu-toggle"
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 -ml-2 rounded-lg text-slate-700 hover:text-slate-900 hover:bg-slate-100 focus:outline-none transition-colors"
-              aria-label="Toggle navigation"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="p-2 -ml-2 rounded-lg text-slate-700 hover:text-slate-950 hover:bg-slate-100 focus:outline-none transition-colors"
+              aria-label="Toggle navigation menu"
+              title="Menu"
             >
-              {mobileMenuOpen ? (
+              {menuOpen ? (
                 <X className="w-5 h-5 text-slate-700" />
               ) : (
                 /* Exact 3 horizontal lines matching Figma screenshot */
                 <svg
-                  width="20"
+                  width="22"
                   height="16"
-                  viewBox="0 0 20 16"
+                  viewBox="0 0 22 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="stroke-slate-700 hover:stroke-slate-900 transition-colors"
+                  className="stroke-slate-700 hover:stroke-slate-950 transition-colors"
                 >
-                  <path d="M1.5 2H18.5" strokeWidth="2.2" strokeLinecap="round" />
-                  <path d="M1.5 8H18.5" strokeWidth="2.2" strokeLinecap="round" />
-                  <path d="M1.5 14H18.5" strokeWidth="2.2" strokeLinecap="round" />
+                  <path d="M1.5 2H20.5" strokeWidth="2.4" strokeLinecap="round" />
+                  <path d="M1.5 8H20.5" strokeWidth="2.4" strokeLinecap="round" />
+                  <path d="M1.5 14H20.5" strokeWidth="2.4" strokeLinecap="round" />
                 </svg>
               )}
             </button>
-          </div>
 
-          {/* ================= Brand Logo (Centered on mobile, Left on desktop) ================= */}
-          <div className="flex items-center">
+            {/* Brand Logo */}
             <a href="#" className="flex items-center">
               <Logo />
             </a>
@@ -91,42 +91,44 @@ export default function Navbar({ onOpenAuth }) {
         </div>
       </div>
 
-      {/* ================= Mobile Expandable Menu ================= */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-5 space-y-1 shadow-lg animate-in fade-in duration-150">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`block px-3 py-2 rounded-lg text-sm font-medium ${
-                link.active
-                  ? 'text-[#E0287D] bg-pink-50 font-semibold'
-                  : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              {link.name}
-            </a>
-          ))}
-          <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenAuth && onOpenAuth('signin');
-              }}
-              className="w-full text-center py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg"
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenAuth && onOpenAuth('signup');
-              }}
-              className="w-full py-2.5 rounded-full text-sm font-semibold text-white bg-[#E0287D] text-center shadow-sm"
-            >
-              Sign Up
-            </button>
+      {/* ================= Expandable Navigation Drawer ================= */}
+      {menuOpen && (
+        <div className="border-t border-slate-100 bg-white px-4 pt-3 pb-5 space-y-1 shadow-lg animate-in fade-in duration-150">
+          <div className="max-w-7xl mx-auto space-y-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`block px-3 py-2 rounded-lg text-sm font-medium ${
+                  link.active
+                    ? 'text-[#E0287D] bg-pink-50 font-semibold'
+                    : 'text-slate-700 hover:bg-slate-50'
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
+            <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row gap-2">
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenAuth && onOpenAuth('signin');
+                }}
+                className="w-full text-center py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  onOpenAuth && onOpenAuth('signup');
+                }}
+                className="w-full py-2.5 rounded-full text-sm font-semibold text-white bg-[#E0287D] text-center shadow-sm"
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
         </div>
       )}
