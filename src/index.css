@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ============================================================
+     🎨 SHARED BRAND GRADIENT (Orange -> Pink -> Violet)
+     ============================================================ */
+  --brand-gradient: linear-gradient(90deg, #FF5E3A 0%, #E0287D 55%, #8A2BE2 100%);
+  --brand-orange: #FF5E3A;
+  --brand-pink: #E0287D;
+  --brand-violet: #8A2BE2;
+}
+
+@layer base {
+  body {
+    background-color: #FFFFFF;
+    color: #1E293B;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .brand-gradient-text {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .brand-gradient-bg {
+    background: var(--brand-gradient);
+  }
+
+  .btn-gradient {
+    background: linear-gradient(90deg, #FF5E3A 0%, #E0287D 100%);
+    color: #ffffff;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+
+  .btn-gradient:hover:not(:disabled) {
+    opacity: 0.95;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(224, 40, 125, 0.25);
+  }
+
+  .btn-card-dark {
+    background-color: #0B1120;
+    color: #FFFFFF;
+    transition: all 0.2s ease;
+  }
+
+  .btn-card-dark:hover:not(:disabled) {
+    background-color: #1E293B;
+  }
+
+  .btn-card-dark:disabled {
+    background-color: #E2E8F0;
+    color: #059669;
+    cursor: not-allowed;
+  }
+
+  .ui-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .ui-card:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 6px 20px -4px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* Toastify styling for light theme */
+.Toastify__toast {
+  border-radius: 12px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.875rem !important;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12) !important;
+}
